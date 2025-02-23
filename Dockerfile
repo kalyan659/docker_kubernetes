@@ -12,7 +12,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app.py .
 
 # Expose the port Streamlit runs on
-EXPOSE 8501
+EXPOSE 5000
 
-# Command to run the Streamlit app
-CMD ["streamlit", "run", "app.py", "--server.address", "0.0.0.0", "--server.port", "8501"]
+# Set environment variables for Flask
+ENV FLASK_APP=app.py
+ENV FLASK_RUN_HOST=0.0.0.0
+
+# Run the Flask app using the `flask run` command
+CMD ["flask", "run"]
